@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let imagePicker = UIImagePickerController()
     
+    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Could not convert to CIImage")
             }
             
-            detect(image: ciImage                                              )
+            detect(image: ciImage)
             
         }
         
@@ -57,7 +58,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Model failed to process image")
             }
             
-            print(results)
+            if let firstResult = results.first {
+                if firstResult.identifier.contains("hotdog") {
+                    self.label.textColor = .green
+                    self.label.text = "Hotdog!"
+                } else {
+                    self.label.textColor = .red
+                    self.label.text = "Not Hotdog :("
+                }
+            }
         }
         
         let handler = VNImageRequestHandler(ciImage: image)
