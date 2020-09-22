@@ -17,8 +17,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let imagePicker = UIImagePickerController()
     
-    @IBOutlet weak var label: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,11 +58,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             if let firstResult = results.first {
                 if firstResult.identifier.contains("hotdog") {
-                    self.label.textColor = .green
-                    self.label.text = "Hotdog!"
+                    
+                    self.navigationItem.title = "Hotdog!"
                 } else {
-                    self.label.textColor = .red
-                    self.label.text = "Not Hotdog :("
+                    
+                    self.navigationItem.title = "Not Hotdog!"
                 }
             }
         }
